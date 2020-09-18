@@ -1,0 +1,5 @@
+---
+containers: 1
+container_name: php-nginx-app
+container_image: php-nginx-app:v2
+container_command: bash

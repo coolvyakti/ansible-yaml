@@ -1,0 +1,18 @@
+---
+- name: Deploy image php-nginx-app
+  hosts: appservers
+  become: yes
+  vars_files: values.yml
+
+- name: Pull php-nginx-app image
+  docker_image:
+    name: "{{ container_image }}"
+    source: pull
+
+- name: Create default containers
+  docker_container:
+    name: "{{ container_name }}{{ item }}"
+    image: "{{ container_image }}"
+    command: "{{ container_command }}"
+    state: present
+    with_sequence: count={{ containers }}
